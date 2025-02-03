@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Ripple Effect</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3em;
+        }
+
+        .features-section {
+            background-color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .feature-card {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 10px;
+        }
+
+        /* Water ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: ripple-animation 1.5s linear;
+            opacity: 0.5;
+            background-color: rgba(0, 100, 255, 0.5);
+        }
+
+        @keyframes ripple-animation {
+            0% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(10);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div>
+            <h1 class="hero-title">Welcome to Our AI Platform</h1>
+            <p>Enhance your skills with immersive experiences.</p>
+            <button onclick="scrollToFeatures()">Explore Features</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <h2>Our Key Features</h2>
+        <div class="feature-card">Interactive Learning</div>
+        <div class="feature-card">Personalized Feedback</div>
+        <div class="feature-card">Real-Life Scenarios</div>
+    </section>
+
+    <!-- Ripple Effect -->
+    <script>
+        document.body.addEventListener('mousemove', function(e) {
+            let ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            document.body.appendChild(ripple);
+            let size = Math.random() * 50 + 50; // Random size for ripple
+            ripple.style.width = `${size}px`;
+            ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.pageX - size / 2}px`;
+            ripple.style.top = `${e.pageY - size / 2}px`;
+            setTimeout(() => {
+                ripple.remove();
+            }, 1500); // Remove ripple after animation
+        });
+
+        function scrollToFeatures() {
+            document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
